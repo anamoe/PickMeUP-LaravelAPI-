@@ -8,7 +8,7 @@ class PimpinanEcoranger extends Model
 {
 	  protected $table = "pimpinan_ecoranger";
          protected $fillable = [
-        'nama','nohp','alamat','user_id'
+        'nama','nohp','alamat','file','user_id'
     ];
 
     //

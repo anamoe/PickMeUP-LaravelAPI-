@@ -11,32 +11,26 @@ class MasyarakatController extends Controller
 {
 
   public function Masyarakat()
-	{
-		$hadiahku= Masyarakat::all();
+  	{
+		  $hadiahku= Masyarakat::all();
 
-    foreach ($hadiahku as $value) {
+      foreach ($hadiahku as $value) {
         $array[]=[
             'id'=>$value->id,
             'nama' =>$value->nama,
             'nohp' =>$value->nohp,
             'alamat'=>$value->alamat,
+            'poin'  =>$value->poin,
             'email' => $value->user->email,
             'username'=>$value->user->username
-  
-        ];
-    
-       
-    }
+            ];
+          }
         return response()->json($array);
- 		// return response()->json([
-   //          'pesan' =>'sukses lah',
-   //          'upload' => $hadiahku
-
-   //  	],200);
-	}
+	   }
   
-  public function TambahMasyarakat (Request $request)
-  {
+    public function TambahMasyarakat (Request $request)
+    {
+
     	$data = new Masyarakat;
     	$data->nama = $request->input('nama');
     	$data->nohp = $request->input('nohp');
@@ -44,84 +38,82 @@ class MasyarakatController extends Controller
     	$data->save();
 
     	return "Berhasil";
-  }
+     }
 
-  public function edit(Request $request, $id)
-  {
-    
-    $file = $request->input('file');
-    $nama= $request->input('naa');
-    $nohp= $request->input('nohp');
-    $alamat= $request->input('alamat');
-    $nama_file = time()."_".".jpeg";
-    // $tujuan_upload = '../resource/gambar/';
-    $tujuan_upload = 'foto_user/';
+    public function edit(Request $request, $id)
+    {
+      
+      $file = $request->input('file_gambar');
+      $nama= $request->input('nama');
+      $nohp= $request->input('nohp');
+      $alamat= $request->input('alamat');
+      $nama_file = time()."_".".jpeg";
+      // $tujuan_upload = '../resource/gambar/';
+      $tujuan_upload = 'foto_user/';
 
-      if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) 
-      {
-        // code...
-        // $response['code'] =1;
-        $response['msg'] ="Kritik dan Saran Berhasil Ditambahkan";
-        echo "Sukses Photo" . $response['msg'];
-
-      } else if ($nama&&$nohp&&$alamat) {
-        // code...
-        // $response['code'] =2;
-        $response['msg'] ="Kritik dan Saran Berhasil Ditambahkan";
-      }else{
-         // $response['code'] =0;
-        $response['msg'] ="Terjadi Kesalahan";
-      }
-        // $data =  Masyarakat::findOrFail($id);
-        $data =  Masyarakat::where('user_id',$id)->first();
-       // $input =$request->all();
-       // $data->update($input);
-       $input =([
-          'file'=> $nama_file,
-          'nama'=> $request->nama,
-          'nohp'=> $request->nohp,
-          'alamat'=> $request->alamat,
-          'user_id'=>$data->user->id
+        if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) 
+        {
+          // code...
+          // $response['code'] =1;
+          $pesan ="Kritik dan Saran Berhasil Ditambahkan";
         
-        ]);
+        } else if ($nama&&$nohp&&$alamat) {
+      
+          $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
-        $i =$data->user_id;
+        }else{
+         
+          $pesan ="Terjadi Kesalahan";
+        }
+         
+          $data =  Masyarakat::where('user_id',$id)->first();
+        
+          $input =([
+            'nama'=> $request->nama,
+            'nohp'=> $request->nohp,
+            'alamat'=> $request->alamat,
+            'user_id'=>$data->user->id
+          ]);
 
-        $user=User::findOrFail($i);
-        $input2 =([
-        'username'=> $request->username,
-          'email'=> $request->email
-        ]);
-        $user->update($input2);
-        $data->update($input);
-        return response()->json([
-             'pesan' =>'sukses lah',
-             'upload' => $user,$data
+          if ($request->input('file_gambar')) {
+              $input['file_gambar'] = $nama_file;
+          }
 
-      ],200);
-        // return "Berhasil";
+          $i =$data->user_id;
+          $user=User::findOrFail($i);
+
+          $input2 =([
+          'username'=> $request->username,
+            'email'=> $request->email
+          ]);
+
+          $user->update($input2);
+          $data->update($input);
+          
+          return response()->json([
+               'pesan' =>'sukses lah',
+               'upload' => $user,$data
+
+        ],200);
+          // return "Berhasil";
     }
    
-  public function show( $id)
-
-  {
-    // $data =  Masyarakat::findOrFail($id);
+    public function show( $id)
+    {
+  
       $data =  Masyarakat::where('user_id',$id)->first();
       $array[]=[
           'id'=> $data->id,
           'nama'=> $data->nama,
           'nohp'=> $data->nohp,
           'alamat'=>   $data->alamat,
+          'poin' => $data->poin,
           'username'=> $data->user->username,
           'email'=>   $data->user->email,
-          'file'=>$data->file
+          'file_gambar'=>$data->file_gambar
       
     ];
-      // return response()->json([
-//          'pesan' =>'sukses lah',
-//          'upload' => $hadiahku
 
-//   ],200);
     return response()->json($array);
   }
    

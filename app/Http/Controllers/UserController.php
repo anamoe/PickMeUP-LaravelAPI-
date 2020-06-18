@@ -7,93 +7,74 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Masyarakat;
+
 class UserController extends Controller
+
 {
-    //
+
     public function DaftarPengguna (Request $request){
+      $cekemail=User::where('email',$request->email)->first();
+      if ($cekemail) {
+     
+        $pesan ="Email Sudah Digunakan";
+  
+        return($pesan);
 
-  $data = ([
-    'username' => $request->username,
-    'email' => $request->email,
-    'password' =>bcrypt($request->password),
-    'role' => 'masyarakat',
-    'token'=>$request->token,
+        }else{
 
-  ]);
-  $lastid = User::create($data)->id;
-   
-  $mas = new Masyarakat;
-  $mas->nama =$request->username;
-   $mas->nohp =$request->nohp;
-    $mas->alamat =$request->alamat;
-     $mas->user_id =$lastid;
-     $mas->save();
+          $data = ([
+          'username' => $request->username,
+          'email' => $request->email,
+          // 'email' => $request->get('email'),
+          'password' =>bcrypt($request->password),
+          'role' => 'masyarakat',
+          'token'=>$request->token,
 
-      if (($data&&$mas)) {
-             $out = [
-                 "message" => "register_success",
-                 "code"    => 201,
-             ];
-         } else {
-             $out = [
-                 "message" => "failed_register",
-                 "code"   => 404,
-             ];
-          }
- 
-         return response()->json($out, $out['code']);
-     // return response()->json()
-    	// $data = new User;
-     //    $data->username = $request->input('username');
-    	// $data->email = $request->input('email');
-     //    $pas = $request->input('password');
-     //    $data->password = bcrypt($pas);
-     //    $data->role = $request->input('role');
-    	// $data->save();
-     //    if (($data)) {
-     //        $out = [
-     //            "message" => "register_success",
-     //            "code"    => 201,
-     //        ];
-     //    } else {
-     //        $out = [
-     //            "message" => "failed_register",
-     //            "code"   => 404,
-     //        ];
-        //  }
- 
-        // return response()->json($out, $out['code']);
+        ]);
+
+        $lastid = User::create($data)->id;
+         
+          $mas = new Masyarakat;
+          $mas->nama =$request->username;
+          $mas->nohp =$request->nohp;
+          $mas->alamat =$request->alamat;
+          $mas->user_id =$lastid;
+          $mas->save();
+
+          $pesan="Selamat Anda Berhasil Daftar, Silahkan Login";
+    
+         return ($pesan);       
+      }
+
     }
-    	// return "Berhasil";
 
-
-  public function MasukPengguna(Request $request){
-   
-
-     $user= User::where('email', $request->email)->first();
+    public function MasukPengguna(Request $request){
+    
+      $email=$request->input('email');
+      $password=$request->input('password');
+      $logins= User::where('email', $email)->orWhere('username', $email)->first();
         $token =([
         'token'=> $request->token
         ]);
-        $user->update($token);
-        // return data::all();
-    $logins = DB::table('user')
-   ->where('email', $request->input('email'))
-   // ->where('password', $request->password)
-   ->first();
+        $logins->update($token);
 
-   if(Hash::check($request->input('password'),$logins->password)){
-
+      if(Hash::check($password,$logins->password)){
     
-   $result["success"] = "1";
-    $result["message"] = "success";
-    //untuk memanggil data sesi Login
-    $result["id"] = $logins->id;
-    $result["username"] = $logins->username;
-    $result["password"] = $logins->password;
-    $result["email"] = $logins->email;
-    $result["role"] = $logins->role;
+          $result["success"] = "1";
+          $result["message"] = "success";
+          //untuk memanggil data sesi Login
+          $result["id"] = $logins->id;
+          $result["username"] = $logins->username;
+          $result["password"] = $logins->password;
+          $result["email"] = $logins->email;
+          $result["role"] = $logins->role;
 
-    return response()->json($result);
-   }
- }
+        return response()->json($result);
+      }else{
+
+         $result["success"] = "0";
+         $result["message"] = "error";
+         return response()->json($result);
+     }
+    }
 }

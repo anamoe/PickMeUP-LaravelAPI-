@@ -8,7 +8,7 @@ class Masyarakat extends Model
 {
       protected $table = "masyarakat";
          protected $fillable = [
-        'nama','nohp','alamat','user_id','file'
+        'nama','nohp','alamat','user_id','file_gambar','poin'
     ];
 
        public function User() {
@@ -18,6 +18,10 @@ class Masyarakat extends Model
        public function transaksi() {
     
         return $this->belongsTo('App\Transaksi','id');
+    }
+     public function kode() {
+    
+        return $this->belongsTo('App\kode','id');
     }
    
 }

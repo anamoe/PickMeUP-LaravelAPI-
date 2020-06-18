@@ -32,9 +32,11 @@ Route::post('tambahpoin','PoinController@TambahPoin');
 Route::get('lihatpoin','PoinController@LihatPoin');
 Route::put('updatepoin/{id}','PoinController@UpdatePoin');
 Route::get('showpoin/{id}','PoinController@show');
+Route::post('kode','PoinController@pushtukarcode');
 
 Route::post('tambahfeedback','FeedbackController@tambahfeedback');
 Route::get('lihatfeedback','FeedbackController@lihatfeedback');
+Route::delete('hapusfeedback/{id}','FeedbackController@HapusFeedback');
 
 Route::post('Daftar','UserController@DaftarPengguna');
 Route::post('Masuk','UserController@MasukPengguna');
@@ -43,12 +45,13 @@ Route::post('Masuk','UserController@MasukPengguna');
 Route::post('tambahhadiah','HadiahController@TambahHadiah');
 Route::get('lihathadiah','HadiahController@LihatHadiah');
 Route::put('updatehadiah/{id}','HadiahController@UpdateHadiah');
+Route::put('upjumlah/{id}','HadiahController@UpdateJumlahHadiah');
 Route::delete('hapushadiah/{id}','HadiahController@HapusHadiah');
 
 Route::get('monitoring', 'MonitoringSampahController@MonitoringSampah');
 Route::get('notifsampah', 'MonitoringSampahController@NotifikasiSampah');
 Route::get('n', 'Controller@__construct');
-Route::get('notif', 'MonitoringSampahController@PushNotifSampah');
+Route::post('notif', 'MonitoringSampahController@PushNotifSampah');
 
 Route::get('masyarakat', 'MasyarakatController@Masyarakat');
 Route::post('tambahmasyarakat', 'MasyarakatController@TambahMasyarakat');
@@ -58,12 +61,21 @@ Route::get('show/{id}', 'MasyarakatController@show');
 
 Route::get('pimpinan', 'PimpinanController@Pimpinan');
 Route::post('tpimpinan', 'PimpinanController@TambahPimpinan');
+Route::get('showpimpinan/{id}', 'PimpinanController@showpimpinan');
+Route::put('editdatapimpinan/{id}', 'PimpinanController@edit');
+
 
 Route::get('petugaslapangan', 'PetugasLapanganController@PetugasLapangan');
+Route::get('showlapangan/{id}', 'PetugasLapanganController@DataPetugasLapangan');
 Route::post('tpetugaslapangan', 'PetugasLapanganController@TambahPetugasLapangan');
+Route::put('editdatapl/{id}', 'PetugasLapanganController@edit');
+
 
 Route::get('petugaskontenreward', 'PetugasKontenRewardController@PetugasKontenReward');
 Route::post('tpetugaskontenreward', 'PetugasKontenRewardController@TambahPetugasKontenReward');
+Route::get('showkonten/{id}','PetugasKontenRewardController@datapetugaskonten');
+Route::put('editdatapkw/{id}', 'PetugasKontenRewardController@edit');
+
 
 Route::get('showt/{id}','TransaksiController@show');
 Route::put('transaksi/{id}','TransaksiController@transaksi');

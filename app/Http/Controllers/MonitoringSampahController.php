@@ -35,10 +35,24 @@ class MonitoringSampahController extends Controller
     	return response()->json($monitoring);
 	}
 
-		public function PushNotifSampah()
+		public function PushNotifSampah(Request $request)
 	{
-          $tok = User::all(); //ambil data user
-        $agenda= MonitoringSampah::where('keterangan',1)->orderBy('updated_at', 'DESC')->first();
+
+        $tok =User::all();
+        $monitoring=MonitoringSampah::all();
+
+
+
+        MonitoringSampah::create([
+            'nama' =>$request->input('nama'),
+             'lat' =>'-11',
+              'lng' =>'88',
+            'keterangan'=> '1'
+
+
+        ]); //ambil data user
+        //whre('nama',$request->nama)
+        $agenda= MonitoringSampah::where('nama',$request->nama)->orderBy('updated_at', 'DESC')->first();
             $tokenList = Arr::pluck($tok,'token');  // Array data token 
 
 			
@@ -50,6 +64,8 @@ class MonitoringSampahController extends Controller
     	'title'=>$agenda->nama,
         'body' => $agenda->lat,
         'sound' => true,
+        'image'=>'https://www.ecoranger.id/wp-content/uploads/2019/03/blue-17.png',
+         
     ];
     
     $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];

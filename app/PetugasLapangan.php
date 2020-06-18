@@ -9,7 +9,7 @@ class PetugasLapangan extends Model
     //
       protected $table = "petugas_lapangan";
          protected $fillable = [
-        'nama','nohp','alamat','user_id'
+        'nama','nohp','alamat','file','user_id'
     ];
 
   public function User() {

@@ -8,6 +8,6 @@ class Agenda extends Model
 {
 	protected $table = "agenda";
 	protected $fillable = [
-        'nama_agenda','keterangan','file'
+        'nama','keterangan','file_gambar'
     ];
 }

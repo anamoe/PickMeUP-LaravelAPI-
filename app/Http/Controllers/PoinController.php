@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Poin;
 use App\User;
+use App\Kode;
 use App\Transaksi;
+use App\Masyarakat;
 
 class PoinController extends Controller
 
@@ -51,7 +53,7 @@ class PoinController extends Controller
 
    public function UpdatePoin(Request $request, $id){
 
-      $data =  Poin::where('user_id',$id)->first();
+      $data =  Masyarakat::where('user_id',$id)->first();
 
        $input =([
           'poin'=>$request->poin,
@@ -81,4 +83,38 @@ class PoinController extends Controller
     ],200);
       // return "Berhasil";
 }
+// public function tukarcode()
+//     {
+//         $masyarakat = Masyarakat::find(1);
+//         return view('tukarcode', compact('masyarakat'));
+//     }
+
+    public function pushtukarcode(Request $request)
+    {
+        $poin = Kode::where('kode_reward', $request->kode_reward)->first();
+
+        $data = ([
+            'masyarakat_id' => 1,
+            'kode_reward' => null ,
+        ]);
+
+        $poin->update($data);
+
+        $masyarakat = Masyarakat::findOrFail(1);
+       
+        $poins =([
+
+        $poin_baru = $poin->nilai,
+         $poin_lama = $masyarakat->poin,
+        $total_poin = $poin_baru + $poin_lama,
+          'poin'=> $total_poin,
+        ]);
+
+        // dd($total_poin);
+        $masyarakat->update($poins);
+        // alert()->success('Sukses');
+        // return back();
+        
+        return response()->json([$poin,$masyarakat]);
+    }
 }

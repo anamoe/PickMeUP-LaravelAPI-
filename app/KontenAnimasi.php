@@ -9,6 +9,6 @@ class KontenAnimasi extends Model
     //
  protected $table = "konten_animasi";
  protected $fillable = [
-        'nama_konten','deskripsi','file'
+        'nama','deskripsi','file_gambar'
     ];
 }

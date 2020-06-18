@@ -24,4 +24,8 @@ class Transaksi extends Model
     
         return $this->belongsTo('App\hadiah','hadiah_id','id');
     }
+     public function masyarakat() {
+    
+        return $this->belongsTo('App\Masyarakat','user_id','id');
+    }
 }

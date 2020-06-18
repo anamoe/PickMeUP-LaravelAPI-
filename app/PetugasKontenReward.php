@@ -8,7 +8,7 @@ class PetugasKontenReward extends Model
 {
 	protected $table = "petugas_konten_reward";
 	protected $fillable = [
-        'nama','nohp','alamat','user_id'
+        'nama','nohp','alamat','file','user_id'
     ];
       public function User() {
     

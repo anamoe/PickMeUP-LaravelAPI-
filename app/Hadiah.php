@@ -9,7 +9,7 @@ class Hadiah extends Model
     //
        protected $table = "hadiah";
          protected $fillable = [
-        'nama_hadiah','deskripsi','jumlah_poin','file'
+        'nama','deskripsi','harga_hadiah','file_gambar','jumlah_hadiah'
     ];
     
       public function transaksi() {

@@ -7,6 +7,7 @@ use App\Poin;
 use App\Hadiah;
 use App\User;
 use App\Transaksi;
+use App\Masyarakat;
 
 class TransaksiController extends Controller
 {
@@ -33,7 +34,7 @@ class TransaksiController extends Controller
 
      public function transaksi(Request $request, $id){
 
-     	 $file = $request->file;
+     	 $file = $request->file_gambar;
      $nama_hadiah= $request->nama_hadiah;
       $harga_hadiah= $request->harga_hadiah;
        $sisapoin= $request->sisapoin;
@@ -57,7 +58,7 @@ class TransaksiController extends Controller
         $response['msg'] ="Terjadi Kesalahan";
       }
 
-     	     $data =  Poin::where('user_id',$id)->first();
+     	     $data =  Masyarakat::where('user_id',$id)->first();
 
        $input =([
           'poin'=>$request->poin,
@@ -69,8 +70,9 @@ class TransaksiController extends Controller
     $mas = new Transaksi;
     $mas->nama_hadiah =$request->nama_hadiah;
     $mas->harga_hadiah =$request->harga_hadiah;
+    $mas->jumlah_hadiah=$request->jumlah_hadiah;
     $mas->sisapoin =$request->sisapoin;
-    $mas->file=$request->file;
+    $mas->file_gambar=$request->file_gambar;
     $mas->user_id =$i;
     $mas->save();
 
@@ -100,7 +102,8 @@ class TransaksiController extends Controller
             'nama_hadiah'=> $data->nama_hadiah,
               'harga_hadiah'=> $data->harga_hadiah,
               'sisapoin'=>   $data->sisapoin,
-              'file'=>   $data->file
+              'jumlah_hadiah'=>$data->jumlah_hadiah,
+              'file_gambar'=>   $data->file_gambar
                 
 
         ];
