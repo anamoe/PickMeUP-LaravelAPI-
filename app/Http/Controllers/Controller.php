@@ -14,13 +14,13 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct()
-    {
-    	$tgl = Carbon::now();
-    	$tgl1 = $tgl->subDays(1);
+    // public function __construct()
+    // {
+    // 	$tgl = Carbon::now();
+    // 	$tgl1 = $tgl->subDays(1);
 
-    	$monitoring = MonitoringSampah::where('keterangan',1)->orderBy('updated_at','DESC')->get();
+    // 	$monitoring = MonitoringSampah::where('keterangan',1)->orderBy('updated_at','DESC')->get();
 
-    	return response()->json($monitoring);
-    }
+    // 	return response()->json($monitoring);
+    // }
 }

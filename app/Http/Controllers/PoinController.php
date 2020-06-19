@@ -95,7 +95,7 @@ class PoinController extends Controller
 
         $data = ([
             'masyarakat_id' => 1,
-            'kode_reward' => null ,
+            'kode_reward' => 'qwertyuipolaksshgfjhsgfnBCVZM892179462' ,
         ]);
 
         $poin->update($data);

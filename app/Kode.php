@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kode extends Model
 {
     //
-    protected $table = "kode";
+    protected $table = "point";
  protected $fillable = [
         'kode_reward','nilai','masyarakat_id'
     ];
