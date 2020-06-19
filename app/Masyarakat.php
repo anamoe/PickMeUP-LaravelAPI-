@@ -21,7 +21,7 @@ class Masyarakat extends Model
     }
      public function kode() {
     
-        return $this->belongsTo('App\kode','id');
+        return $this->belongsTo('App\Poin','id');
     }
    
 }

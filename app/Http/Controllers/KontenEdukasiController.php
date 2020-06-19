@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\KontenAnimasi;
+use App\KontenEdukasi;
 use App\User;
 use Illuminate\Support\Arr;
 
-class KontenAnimasiController extends Controller
+class KontenEdukasiController extends Controller
 {
     public function lihatkonten(){
-		  $upload = KontenAnimasi::all();
+		  $upload = KontenEdukasi::all();
         return response()->json([
             'pesan' =>'Konten Edukasi',
             'upload' => $upload
@@ -36,13 +36,13 @@ class KontenAnimasiController extends Controller
           $pesan="error";
         }
 
-    		KontenAnimasi::create([
+    		KontenEdukasi::create([
     			'file_gambar' => $nama_file,
     			'nama' => $request->input('nama'),
     			'deskripsi' =>$request->input('deskripsi'),
     		]);
 
-        $konten= KontenAnimasi::where('nama',$request->nama)->orderBy('updated_at', 'DESC')->first();
+        $konten= KontenEdukasi::where('nama',$request->nama)->orderBy('updated_at', 'DESC')->first();
         $tokenList = Arr::pluck($tok,'token');  // Array data token 
 
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
@@ -110,7 +110,7 @@ class KontenAnimasiController extends Controller
         $pesan ="Terjadi Kesalahan";
       }
 
-      $konten =  KontenAnimasi::findOrFail($id);
+      $konten =  KontenEdukasi::findOrFail($id);
        // $input =$request->all();
       $input =([
           // 'file'=> $nama_file,
@@ -133,7 +133,7 @@ class KontenAnimasiController extends Controller
 
     public function HapusKonten(Request $request,$id){
 
-       $data =  KontenAnimasi::findOrFail($id);
+       $data =  KontenEdukasi::findOrFail($id);
        $input =$request->all();
        $data->delete($input);
        // return "sukses";

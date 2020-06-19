@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class KontenAnimasi extends Model
+class KontenEdukasi extends Model
 {
     //
  protected $table = "konten_animasi";

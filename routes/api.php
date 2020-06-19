@@ -22,11 +22,11 @@ Route::get('lihatagenda','AgendaController@lihatagenda');
 Route::put('updateagenda/{id}','AgendaController@UpdateAgenda');
 Route::delete('hapusagenda/{id}','AgendaController@HapusAgenda');
 
-Route::post('tambahkonten','KontenAnimasiController@tambahkonten');
-Route::get('lihatkonten','KontenAnimasiController@lihatkonten');
+Route::post('tambahkonten','KontenEdukasiController@tambahkonten');
+Route::get('lihatkonten','KontenEdukasiController@lihatkonten');
 Route::get('showpoin/{id}', 'PoinController@show');
-Route::put('updatekonten/{id}','KontenAnimasiController@UpdateKonten');
-Route::delete('hapuskonten/{id}','KontenAnimasiController@HapusKonten');
+Route::put('updatekonten/{id}','KontenEdukasiController@UpdateKonten');
+Route::delete('hapuskonten/{id}','KontenEdukasiController@HapusKonten');
 
 Route::post('tambahpoin','PoinController@TambahPoin');
 Route::get('lihatpoin','PoinController@LihatPoin');
@@ -48,7 +48,7 @@ Route::put('updatehadiah/{id}','HadiahController@UpdateHadiah');
 Route::put('upjumlah/{id}','HadiahController@UpdateJumlahHadiah');
 Route::delete('hapushadiah/{id}','HadiahController@HapusHadiah');
 
-Route::get('monitoring', 'MonitoringSampahController@MonitoringSampah');
+Route::get('monitoring', 'TempatSampahController@MonitoringSampah');
 Route::get('notifsampah', 'MonitoringSampahController@NotifikasiSampah');
 Route::get('n', 'Controller@__construct');
 Route::post('notif', 'MonitoringSampahController@PushNotifSampah');

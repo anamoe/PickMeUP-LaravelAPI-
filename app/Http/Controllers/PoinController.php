@@ -91,7 +91,7 @@ class PoinController extends Controller
 
     public function pushtukarcode(Request $request)
     {
-        $poin = Kode::where('kode_reward', $request->kode_reward)->first();
+        $poin = Poin::where('kode_reward', $request->kode_reward)->first();
 
         $data = ([
             'masyarakat_id' => 1,

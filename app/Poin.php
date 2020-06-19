@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poin extends Model
 {
-    //
-         protected $table = "poin";
-         protected $fillable = [
-        'poin','user_id'
+        protected $table = "point";
+ protected $fillable = [
+        'kode_reward','nilai','masyarakat_id'
     ];
 
-       public function User() {
+      public function masyarakat() {
     
-    	return $this->belongsTo('App\User','user_id','id');
-    }
-       public function transaksi() {
-    
-        return $this->belongsTo('App\Transaksi','id');
+        return $this->belongsTo('App\Masyarakat','masyarakat_id','id');
     }
    
 }

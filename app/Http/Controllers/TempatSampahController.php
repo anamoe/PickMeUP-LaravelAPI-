@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\MonitoringSampah;
+use App\TempatSampah;
 use App\User;
 use Illuminate\Support\Arr;
 
-class MonitoringSampahController extends Controller
+class TempatSampahController extends Controller
 
 {
 	// public function __construct(){
@@ -16,7 +16,7 @@ class MonitoringSampahController extends Controller
 
 	public function MonitoringSampah()
 	{
-		$lihat= MonitoringSampah::all();
+		$lihat= TempatSampah::all();
 
 
 
@@ -30,7 +30,7 @@ class MonitoringSampahController extends Controller
 
 	public function NotifikasiSampah()
 	{
-			$monitoring = MonitoringSampah::where('keterangan',1)->orderBy('updated_at','DESC')->get();
+			$monitoring = TempatSampah::where('keterangan',1)->orderBy('updated_at','DESC')->get();
 
     	return response()->json($monitoring);
 	}
@@ -39,11 +39,11 @@ class MonitoringSampahController extends Controller
 	{
 
         $tok =User::all();
-        $monitoring=MonitoringSampah::all();
+        $monitoring=TempatSampah::all();
 
 
 
-        MonitoringSampah::create([
+       TempatSampah::create([
             'nama' =>$request->input('nama'),
              'lat' =>'-11',
               'lng' =>'88',
@@ -52,7 +52,7 @@ class MonitoringSampahController extends Controller
 
         ]); //ambil data user
         //whre('nama',$request->nama)
-        $agenda= MonitoringSampah::where('nama',$request->nama)->orderBy('updated_at', 'DESC')->first();
+        $agenda= TempatSampah::where('nama',$request->nama)->orderBy('updated_at', 'DESC')->first();
             $tokenList = Arr::pluck($tok,'token');  // Array data token 
 
 			
