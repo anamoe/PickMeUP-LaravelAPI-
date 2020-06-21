@@ -15,5 +15,12 @@ class Poin extends Model
     
         return $this->belongsTo('App\Masyarakat','masyarakat_id','id');
     }
-   
+       public function user() {
+    
+        return $this->belongsTo('App\User','user_id','id');
+    }
+     public function tempat_sampah() {
+    
+        return $this->belongsTo('App\TempatSampah','tempat_sampah_id','id');
+    }
 }

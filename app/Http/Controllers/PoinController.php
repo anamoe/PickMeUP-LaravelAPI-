@@ -31,11 +31,15 @@ class PoinController extends Controller
   public function show( $id){
     $data =  Poin::where('user_id',$id)->first();
       $array[]=[
+      // 'masyarakat_id'=>$data->masyarakat->nama,
       'id'=> $data->id,
-      'poin'=> $data->poin,
+      'nilai'=> $data->nilai,
+      'kode_reward'=> $data->kode_reward,
+      'status'=> $data->status,
+      'tempat_sampah_id'=>$data->tempat_sampah->nama,
     
       ];
-        return response()->json($array);
+        return response()->json([ 'upload' =>$array]);
     }
 
 
