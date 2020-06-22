@@ -62,18 +62,17 @@ class TransaksiController extends Controller
 
        $input =([
           'poin'=>$request->poin,
-           'user_id'=>$data->user->id,
+           'masyarakat_id'=>$data->id,
       
      ]);
      $data->update($input);
-        $i =$data->user_id;
     $mas = new Transaksi;
     $mas->nama_hadiah =$request->nama_hadiah;
     $mas->harga_hadiah =$request->harga_hadiah;
     $mas->jumlah_hadiah=$request->jumlah_hadiah;
     $mas->sisapoin =$request->sisapoin;
     $mas->file_gambar=$request->file_gambar;
-    $mas->user_id =$i;
+    $mas->masyarakat_id =$data->id;
     $mas->save();
 
     
@@ -91,12 +90,12 @@ class TransaksiController extends Controller
  
     }
 
-    public function LihatTransaksi( $id){
+    public function LihatTransaksi($id){
         // $data =  Masyarakat::findOrFail($id);
+           $username =  Masyarakat::where('user_id',$id)->first();
+          $trans =  Transaksi::where('masyarakat_id',$username->id)->get();
 
-          $trans =  Transaksi::where('user_id',$id)->get();
-
-    foreach ($trans as $data) {
+    foreach ($trans as $datas => $data) {
         $array[]=[
             'id'=> $data->id,
             'nama_hadiah'=> $data->nama_hadiah,
@@ -108,11 +107,12 @@ class TransaksiController extends Controller
 
         ];
     }
-          return response()->json([
-            'pesan' =>'sukses lah',
-            'upload' => $array
+     return response()->json([ 'upload' =>$array]);
+     //      return response()->json([
+     //        'pesan' =>'sukses lah',
+     //        'upload' => $array
 
-     ],200);
+     // ],200);
         // return response()->json($array);
     }
 

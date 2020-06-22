@@ -28,8 +28,12 @@ class PoinController extends Controller
     		return "berhasil";
   }
 
-  public function show( $id){
-    $data =  Poin::where('user_id',$id)->first();
+  public function show($id){
+    $username =  Masyarakat::where('user_id',$id)->first();
+    $poin =  Poin::where('masyarakat_id',$username->id)->get();
+
+    foreach ($poin as $datas => $data) {
+
       $array[]=[
       // 'masyarakat_id'=>$data->masyarakat->nama,
       'id'=> $data->id,
@@ -37,8 +41,10 @@ class PoinController extends Controller
       'kode_reward'=> $data->kode_reward,
       'status'=> $data->status,
       'tempat_sampah_id'=>$data->tempat_sampah->nama,
+      'masyarakat_id'=>$data->masyarakat_id,
     
       ];
+        }
         return response()->json([ 'upload' =>$array]);
     }
 
@@ -93,12 +99,13 @@ class PoinController extends Controller
 //         return view('tukarcode', compact('masyarakat'));
 //     }
 
-    public function pushtukarcode(Request $request)
+    public function pushtukarcode(Request $request, $id)
     {
         $poin = Poin::where('kode_reward', $request->kode_reward)->first();
+           $datas =  Masyarakat::where('user_id',$id)->first();
 
         $data = ([
-            'masyarakat_id' => 1,
+            'masyarakat_id' => $datas->id,
             'kode_reward' => 'qwertyuipolaksshgfjhsgfnBCVZM892179462' ,
         ]);
 

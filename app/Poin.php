@@ -8,7 +8,7 @@ class Poin extends Model
 {
         protected $table = "point";
  protected $fillable = [
-        'kode_reward','nilai','masyarakat_id'
+        'kode_reward','nilai','masyarakat_id','tempat_sampah_id'
     ];
 
       public function masyarakat() {

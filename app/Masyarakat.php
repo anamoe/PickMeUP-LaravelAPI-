@@ -19,9 +19,9 @@ class Masyarakat extends Model
     
         return $this->belongsTo('App\Transaksi','id');
     }
-     public function kode() {
+    //  public function poin() {
     
-        return $this->belongsTo('App\Poin','id');
-    }
+    //     return $this->belongsTo('App\Poin','id');
+    // }
    
 }

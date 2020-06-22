@@ -9,7 +9,7 @@ class Transaksi extends Model
     //
     		protected $table='transaksi';
           protected $fillable = [
-        'poin_id','user_id','hadiah_id','file'
+        'poin_id','masyarakat_id','hadiah_id','file'
     ];
 
        public function User() {
@@ -26,6 +26,6 @@ class Transaksi extends Model
     }
      public function masyarakat() {
     
-        return $this->belongsTo('App\Masyarakat','user_id','id');
+        return $this->belongsTo('App\Masyarakat','masyarakat_id','id');
     }
 }

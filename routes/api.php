@@ -32,7 +32,7 @@ Route::post('tambahpoin','PoinController@TambahPoin');
 Route::get('lihatpoin','PoinController@LihatPoin');
 Route::put('updatepoin/{id}','PoinController@UpdatePoin');
 Route::get('showpoin/{id}','PoinController@show');
-Route::post('kode','PoinController@pushtukarcode');
+Route::put('kode/{id}','PoinController@pushtukarcode');
 
 Route::post('tambahfeedback','FeedbackController@tambahfeedback');
 Route::get('lihatfeedback','FeedbackController@lihatfeedback');
