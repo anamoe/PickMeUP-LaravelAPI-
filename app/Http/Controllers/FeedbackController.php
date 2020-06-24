@@ -101,4 +101,9 @@ class FeedbackController extends Controller
      return "berhasil";
 
 }
+  public function webview()
+  {
+    return view('feedback');
+    # code...
+  }
 }
